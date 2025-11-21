@@ -31,7 +31,7 @@ jobs:
           # 出力するファイル名
           output-format: pdf
           # 出力するディレクトリ名
-          output-dir: path/to/artifact/
+          output-dir: path/to/artifact
           # Pandocに渡す追加オプション（例: スタンドアロン、目次）
           extra-args: "--standalone --toc"
 
