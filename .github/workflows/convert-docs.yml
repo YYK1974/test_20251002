@@ -21,8 +21,8 @@ jobs:
 
       # 2. Pandoc公式のアクションを実行する
       - name: Convert Markdown to PDF
-        # pandoc/file-converter-action の バージョン3 を使用
-        uses: pandoc/file-converter-action@v3
+        # pandoc/action-pandoc@v3 を使用
+        uses: pandoc/action-pandoc@v3
         with:
           # 変換する入力ファイル
           input: "specification.md"
