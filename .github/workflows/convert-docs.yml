@@ -1,7 +1,7 @@
 # ファイル名: .github/workflows/convert-docs.yml
 
 name: Pandoc Document Conversion
-run-name: ${{ github.actor }} is Running Actions
+run-name: ${{ github.actor }} is Running Pandoc, Upload Actions
 
 on:
   # "main" ブランチに push されたときに実行
@@ -43,4 +43,4 @@ jobs:
           # アーティファクトの名前
           name: converted-pdf
           # 保存するファイルのパス
-          path: path/to/artifact/out.pdf
+          path: path/to/artifact
