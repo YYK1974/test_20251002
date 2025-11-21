@@ -1,6 +1,7 @@
 # ファイル名: .github/workflows/convert-docs.yml
 
 name: Pandoc Document Conversion
+run-name: ${{ github.actor }} is Running Actions
 
 on:
   # "main" ブランチに push されたときに実行
