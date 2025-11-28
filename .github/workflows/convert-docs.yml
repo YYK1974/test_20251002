@@ -33,11 +33,11 @@ jobs:
           # 出力するディレクトリ名
           output-dir: path/to/artifact
           # Pandocに渡す追加オプション（例: スタンドアロン、目次）
-          extra-args: "--standalone --toc"
+          extra-args: "--standalone --toc --number-sections"
 
       # 3. GitHubのPandoc Converter のHTMLへの変換アクションを実行する
       # <ref>  https://github.com/marketplace/actions/pandoc-converter
-      - name: Convert Markdown to PDF
+      - name: Convert Markdown to HTML
         # gbraad-actions/pandoc@main を使用
         uses: gbraad-actions/pandoc@main
         with:
@@ -48,7 +48,7 @@ jobs:
           # 出力するディレクトリ名
           output-dir: path/to/artifact
           # Pandocに渡す追加オプション（例: スタンドアロン、目次）
-          extra-args: "--standalone --toc"
+          extra-args: "--standalone --toc --number-sections"
 
       # 4. (オプション) 変換したファイルをアーティファクトとして保存する
       # <ref> https://github.com/marketplace/actions/upload-a-build-artifact
