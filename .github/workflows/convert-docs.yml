@@ -20,7 +20,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      # 2. GitHubのPandoc Converter のアクションを実行する
+      # 2. GitHubのPandoc Converter のPDFへの変換アクションを実行する
       # <ref>  https://github.com/marketplace/actions/pandoc-converter
       - name: Convert Markdown to PDF
         # gbraad-actions/pandoc@main を使用
@@ -35,7 +35,22 @@ jobs:
           # Pandocに渡す追加オプション（例: スタンドアロン、目次）
           extra-args: "--standalone --toc"
 
-      # 3. (オプション) 変換したファイルをアーティファクトとして保存する
+      # 3. GitHubのPandoc Converter のHTMLへの変換アクションを実行する
+      # <ref>  https://github.com/marketplace/actions/pandoc-converter
+      - name: Convert Markdown to PDF
+        # gbraad-actions/pandoc@main を使用
+        uses: gbraad-actions/pandoc@main
+        with:
+          # 変換する入力ファイル
+          source: "specification.md"
+          # 出力するファイル名
+          output-format: html
+          # 出力するディレクトリ名
+          output-dir: path/to/artifact
+          # Pandocに渡す追加オプション（例: スタンドアロン、目次）
+          extra-args: "--standalone --toc"
+
+      # 4. (オプション) 変換したファイルをアーティファクトとして保存する
       # <ref> https://github.com/marketplace/actions/upload-a-build-artifact
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
