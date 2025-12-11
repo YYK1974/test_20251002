@@ -1,0 +1,18 @@
+\usepackage[most]{tcolorbox}
+
+% 背景色に使う色を定義（例：薄いグレー）
+\definecolor{codegray}{rgb}{0.95, 0.95, 0.95}
+
+% PandocのShaded環境をtcolorboxで再定義
+\renewenvironment{Shaded}{
+  \begin{tcolorbox}[
+    colback=codegray,      % 背景色を適用
+    colframe=gray!60,      % 枠線の色（薄いグレー）
+    boxrule=0.4pt,         % 枠線の太さ
+    sharp corners,         % 角を尖らせる
+    nobeforeafter,         % 前後の余白を調整
+    left=5pt, right=5pt, top=5pt, bottom=5pt % パディング
+  ]
+}{
+  \end{tcolorbox}
+}
