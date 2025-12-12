@@ -28,9 +28,10 @@ jobs:
         uses: docker://pandoc/core:3.8
         with:
           # 変換する入力ファイル
-          source: "specification.md"
+          source: "specification_png.md"
           # 出力するファイル名
           output-format: pdf
+          output: specification.pdf
           # 出力するディレクトリ名
           output-dir: path/to/artifact
           # Pandocに渡す追加オプション（例: スタンドアロン、目次）
@@ -47,6 +48,7 @@ jobs:
           source: "specification.md"
           # 出力するファイル名
           output-format: html
+          output: specification.html
           # 出力するディレクトリ名
           output-dir: path/to/artifact
           # Pandocに渡す追加オプション（例: スタンドアロン、目次）
@@ -60,4 +62,4 @@ jobs:
           # アーティファクトの名前
           name: converted-pdf
           # 保存するファイルのパス
-          path: path/to/artifact
+          path: path/to/artifact/*
