@@ -19,52 +19,35 @@ jobs:
       # 1. リポジトリのコードをチェックアウトする
       - name: Check out repository
         uses: actions/checkout@v4
+      # 2. 変換先のディレクトリを作成 (オプションだが推奨)
+      - name: Create Artifact Directory
+        run: mkdir -p artifact_output
 
-      # 2. GitHubのPandoc Converter のPDFへの変換アクションを実行する
-      # <ref>  https://github.com/marketplace/actions/pandoc-converter
+      # 3. GitHubのPandoc Converter のPDFへの変換アクションを実行する
       - name: Convert Markdown to PDF
-        # gbraad-actions/pandoc@main を使用
-        # uses: gbraad-actions/pandoc@main
         uses: docker://pandoc/core:3.8
         with:
           # 変換する入力ファイル
           source: "specification_png.md"
           # 出力するファイル名
           output-format: pdf
-          output: specification.pdf
-          # 出力するディレクトリ名
-          output-dir: artifact_output
+          output: artifact_output/specification.pdf
           # Pandocに渡す追加オプション（例: スタンドアロン、目次）
           extra-args: "--standalone --toc --number-sections -V margin-left=20mm -V margin-right=20mm -H code_style.tex"
 
-      # 3. GitHubのPandoc Converter のHTMLへの変換アクションを実行する
-      # <ref>  https://github.com/marketplace/actions/pandoc-converter
+      # 4. GitHubのPandoc Converter のHTMLへの変換アクションを実行する
       - name: Convert Markdown to HTML
-        # gbraad-actions/pandoc@main を使用
-        #uses: gbraad-actions/pandoc@main
         uses: docker://pandoc/core:3.8
         with:
           # 変換する入力ファイル
           source: "specification.md"
           # 出力するファイル名
           output-format: html
-          output: specification.html
-          # 出力するディレクトリ名
-          output-dir: artifact_output
+          output: artifact_output/specification.html
           # Pandocに渡す追加オプション（例: スタンドアロン、目次）
           extra-args: "--standalone --toc --number-sections -c pandoc.css -c custom.css"
 
-      # # 4. (オプション) 変換したファイルをアーティファクトとして保存する
-      # # <ref> https://github.com/marketplace/actions/upload-a-build-artifact
-      # - name: Upload Artifact
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     # アーティファクトの名前
-      #     name: converted-pdf
-      #     # 保存するファイルのパス
-      #     path: path/to/artifact/*
-
-      # 4-A. PDFアーティファクトのアップロード
+      # 5. PDFアーティファクトのアップロード
       - name: Upload PDF Artifact
         uses: actions/upload-artifact@v4
         with:
@@ -72,7 +55,7 @@ jobs:
           # パスを修正
           path: artifact_output/specification.pdf
 
-      # 4-B. HTMLアーティファクトのアップロード
+      # 6. HTMLアーティファクトのアップロード
       - name: Upload HTML Artifact
         uses: actions/upload-artifact@v4
         with:
