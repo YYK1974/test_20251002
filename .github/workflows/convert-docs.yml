@@ -33,7 +33,7 @@ jobs:
           output-format: pdf
           output: specification.pdf
           # 出力するディレクトリ名
-          output-dir: path/to/artifact
+          output-dir: artifact_output
           # Pandocに渡す追加オプション（例: スタンドアロン、目次）
           extra-args: "--standalone --toc --number-sections -V margin-left=20mm -V margin-right=20mm -H code_style.tex"
 
@@ -50,16 +50,32 @@ jobs:
           output-format: html
           output: specification.html
           # 出力するディレクトリ名
-          output-dir: path/to/artifact
+          output-dir: artifact_output
           # Pandocに渡す追加オプション（例: スタンドアロン、目次）
           extra-args: "--standalone --toc --number-sections -c pandoc.css -c custom.css"
 
-      # 4. (オプション) 変換したファイルをアーティファクトとして保存する
-      # <ref> https://github.com/marketplace/actions/upload-a-build-artifact
-      - name: Upload Artifact
+      # # 4. (オプション) 変換したファイルをアーティファクトとして保存する
+      # # <ref> https://github.com/marketplace/actions/upload-a-build-artifact
+      # - name: Upload Artifact
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     # アーティファクトの名前
+      #     name: converted-pdf
+      #     # 保存するファイルのパス
+      #     path: path/to/artifact/*
+
+      # 4-A. PDFアーティファクトのアップロード
+      - name: Upload PDF Artifact
         uses: actions/upload-artifact@v4
         with:
-          # アーティファクトの名前
-          name: converted-pdf
-          # 保存するファイルのパス
-          path: path/to/artifact/*
+          name: specification-pdf
+          # パスを修正
+          path: artifact_output/specification.pdf
+
+      # 4-B. HTMLアーティファクトのアップロード
+      - name: Upload HTML Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: specification-html
+          # パスを修正
+          path: artifact_output/specification.html
