@@ -1,17 +1,9 @@
-
 ---
 title: "Quantum Open Development Ecosystem (QODE)\n
  Optimization Division\n
  Specification Document"
 author: "Q-STAR\n(Quantum STrategic industry Alliance for Revolution)"
 date: "May 29, 2025"
-toc: true
-filters:
- -diagram
-header: |
- \usepackage{fontspec}
- \setmainfont{Arial}
- \setsansfont{Helvetica}
 ---
 
 # Overview {#overview}
