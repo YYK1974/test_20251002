@@ -25,7 +25,7 @@ jobs:
 
       # 3. GitHubのPandoc Converter のPDFへの変換アクションを実行する
       - name: Convert Markdown to PDF
-        uses: docker://pandoc/core:3.8
+        uses: docker://pandoc/latex:3.8
         with:
           # 変換する入力ファイル
           source: "specification_png.md"
