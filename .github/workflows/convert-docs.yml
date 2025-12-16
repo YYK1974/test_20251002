@@ -30,8 +30,7 @@ jobs:
           # 変換する入力ファイル
           source: "specification_png.md"
           # 出力するファイル名
-          output-format: pdf
-          output: artifact_output/specification.pdf
+          args: --output=artifact_output/specification.pdf
           # Pandocに渡す追加オプション（例: スタンドアロン、目次）
           extra-args: "--standalone --toc --number-sections -V margin-left=20mm -V margin-right=20mm -H code_style.tex"
 
@@ -42,9 +41,7 @@ jobs:
           # 変換する入力ファイル
           source: "specification.md"
           # 出力するファイル名
-          output-format: html
-          output: artifact_output/specification.html
-          # Pandocに渡す追加オプション（例: スタンドアロン、目次）
+          args: --output=artifact_output/specification.html
           extra-args: "--standalone --toc --number-sections -c pandoc.css -c custom.css"
 
       # 5. PDFアーティファクトのアップロード
