@@ -31,7 +31,7 @@ jobs:
           # 出力するディレクトリ名
           output-dir: path/to/artifact
           # Pandocに渡す追加オプション（例: スタンドアロン、目次）
-          extra-args: "--standalone --toc --number-sections --pdf-engine=xelatex --template=pdf_custom.tex"
+          extra-args: "--standalone --toc --number-sections --pdf-engine=xelatex -H pdf_custom.tex"
 
       # 3. GitHubのPandoc Converter のHTMLへの変換アクションを実行する
       # <ref>  https://github.com/marketplace/actions/pandoc-converter
