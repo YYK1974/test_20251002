@@ -30,9 +30,12 @@ jobs:
           # 変換する入力ファイル
           source: "specification_png.md"
           # 出力するファイル名
-          args: --output=artifact_output/specification.pdf
-          # Pandocに渡す追加オプション（例: スタンドアロン、目次）
-          extra-args: "--standalone --toc --number-sections -V margin-left=20mm -V margin-right=20mm -H code_style.tex"
+          args: >-
+            --output=artifact_output/specification.pdf
+            --standalone
+            --toc
+            --number-sections
+            -H pdf_custom.tex
 
       # 4. GitHubのPandoc Converter のHTMLへの変換アクションを実行する
       - name: Convert Markdown to HTML
@@ -41,8 +44,13 @@ jobs:
           # 変換する入力ファイル
           source: "specification.md"
           # 出力するファイル名
-          args: --output=artifact_output/specification.html
-          extra-args: "--standalone --toc --number-sections -c pandoc.css -c custom.css"
+          args: >-
+            --output=artifact_output/specification.html
+            --standalone
+            --toc
+            --number-sections
+            -c pandoc.css
+            -c custom.css
 
       # 5. PDFアーティファクトのアップロード
       - name: Upload PDF Artifact
