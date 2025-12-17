@@ -1,5 +1,3 @@
-# ファイル名: .github/workflows/convert-docs.yml
-
 name: Pandoc Document Conversion
 run-name: ${{ github.actor }} is Running Pandoc, Upload Actions
 
@@ -19,51 +17,43 @@ jobs:
       # 1. リポジトリのコードをチェックアウトする
       - name: Check out repository
         uses: actions/checkout@v4
-      # 2. 変換先のディレクトリを作成 (オプションだが推奨)
-      - name: Create Artifact Directory
-        run: mkdir -p artifact_output
 
-      # 3. GitHubのPandoc Converter のPDFへの変換アクションを実行する
+      # 2. GitHubのPandoc Converter のPDFへの変換アクションを実行する
+      # <ref>  https://github.com/marketplace/actions/pandoc-converter
       - name: Convert Markdown to PDF
-        uses: gbraad-actions/pandoc@main
-        with:
-          # 変換する入力ファイル
-          source: "specification_png.md"
-          # 出力するファイル名
-          extra-args: >-
-            --output=artifact_output/specification.pdf
-            --standalone
-            --toc
-            --number-sections
-            -H code_style.tex
-
-      # 4. GitHubのPandoc Converter のHTMLへの変換アクションを実行する
-      - name: Convert Markdown to HTML
+        # gbraad-actions/pandoc@main を使用
         uses: gbraad-actions/pandoc@main
         with:
           # 変換する入力ファイル
           source: "specification.md"
           # 出力するファイル名
-          extra-args: >-
-            --output=artifact_output/specification.html
-            --standalone
-            --toc
-            --number-sections
-            -c pandoc.css
-            -c custom.css
+          output-format: pdf
+          # 出力するディレクトリ名
+          output-dir: path/to/artifact
+          # Pandocに渡す追加オプション（例: スタンドアロン、目次）
+          extra-args: "--standalone --toc"
 
-      # 5. PDFアーティファクトのアップロード
-      - name: Upload PDF Artifact
+      # 3. GitHubのPandoc Converter のHTMLへの変換アクションを実行する
+      # <ref>  https://github.com/marketplace/actions/pandoc-converter
+      - name: Convert Markdown to PDF
+        # gbraad-actions/pandoc@main を使用
+        uses: gbraad-actions/pandoc@main
+        with:
+          # 変換する入力ファイル
+          source: "specification.md"
+          # 出力するファイル名
+          output-format: html
+          # 出力するディレクトリ名
+          output-dir: path/to/artifact
+          # Pandocに渡す追加オプション（例: スタンドアロン、目次）
+          extra-args: "--standalone --toc"
+
+      # 4. (オプション) 変換したファイルをアーティファクトとして保存する
+      # <ref> https://github.com/marketplace/actions/upload-a-build-artifact
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: specification-pdf
-          # パスを修正
-          path: artifact_output/specification.pdf
-
-      # 6. HTMLアーティファクトのアップロード
-      - name: Upload HTML Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: specification-html
-          # パスを修正
-          path: artifact_output/specification.html
+          # アーティファクトの名前
+          name: converted-pdf
+          # 保存するファイルのパス
+          path: path/to/artifact
