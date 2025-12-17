@@ -25,13 +25,13 @@ jobs:
         uses: gbraad-actions/pandoc@main
         with:
           # 変換する入力ファイル
-          source: "specification.md"
+          source: "specification_png.md"
           # 出力するファイル名
           output-format: pdf
           # 出力するディレクトリ名
           output-dir: path/to/artifact
           # Pandocに渡す追加オプション（例: スタンドアロン、目次）
-          extra-args: "--standalone --toc"
+          extra-args: "--standalone --toc --number-sections --pdf-engine=xelatex --template=pdf_custom.tex"
 
       # 3. GitHubのPandoc Converter のHTMLへの変換アクションを実行する
       # <ref>  https://github.com/marketplace/actions/pandoc-converter
@@ -46,7 +46,7 @@ jobs:
           # 出力するディレクトリ名
           output-dir: path/to/artifact
           # Pandocに渡す追加オプション（例: スタンドアロン、目次）
-          extra-args: "--standalone --toc"
+          extra-args: "--standalone --toc --number-sections -c pandoc.css -c custom.css"
 
       # 4. (オプション) 変換したファイルをアーティファクトとして保存する
       # <ref> https://github.com/marketplace/actions/upload-a-build-artifact
