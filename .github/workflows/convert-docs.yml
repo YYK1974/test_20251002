@@ -46,7 +46,7 @@ jobs:
           # 出力するディレクトリ名
           output-dir: path/to/artifact
           # Pandocに渡す追加オプション（例: スタンドアロン、目次）
-          extra-args: "--standalone --toc --number-sections -c pandoc.css -c custom.css"
+          extra-args: "--standalone --toc --number-sections -css pandoc.css -css custom.css"
 
       # 4. (オプション) 変換したファイルをアーティファクトとして保存する
       # <ref> https://github.com/marketplace/actions/upload-a-build-artifact
