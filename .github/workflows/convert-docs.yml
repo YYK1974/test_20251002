@@ -25,25 +25,26 @@ jobs:
 
       # 3. GitHubのPandoc Converter のPDFへの変換アクションを実行する
       - name: Convert Markdown to PDF
-        uses: docker://pandoc/latex:3.8
+        uses: gbraad-actions/pandoc@main
         with:
           # 変換する入力ファイル
           source: "specification_png.md"
           # 出力するファイル名
-          args: >-
+          extra-args: >-
             --output=artifact_output/specification.pdf
             --standalone
             --toc
             --number-sections
+            -H code_style.tex
 
       # 4. GitHubのPandoc Converter のHTMLへの変換アクションを実行する
       - name: Convert Markdown to HTML
-        uses: docker://pandoc/core:3.8
+        uses: gbraad-actions/pandoc@main
         with:
           # 変換する入力ファイル
           source: "specification.md"
           # 出力するファイル名
-          args: >-
+          extra-args: >-
             --output=artifact_output/specification.html
             --standalone
             --toc
