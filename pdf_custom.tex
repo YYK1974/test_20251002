@@ -1,10 +1,10 @@
 \usepackage{geometry}
 \geometry{
-  a4paper,         % 用紙サイズ (デフォルトはletterpaper、A4を明示的に指定)
-  lmargin=22mm,    % 左余白
-  rmargin=22mm,    % 右余白
-  tmargin=25mm,    % 上余白 (例)
-  bmargin=22mm     % 下余白 (例)
+  a4paper,
+  lmargin=22mm,
+  rmargin=22mm,
+  tmargin=25mm,
+  bmargin=22mm
 }
 
 \usepackage[framemethod=default]{mdframed}
@@ -14,20 +14,32 @@
 \definecolor{codegray}{rgb}{0.95, 0.95, 0.95}
 \definecolor{bordergray}{rgb}{0.6, 0.6, 0.6}
 
-% Pandocがコードブロックに使用する「Shaded」環境を再定義
-\renewenvironment{Shaded}{
+% --- エラー回避ロジック ---
+% 1. Shaded環境が未定義の場合は、空の環境を定義する
+% 2. 定義済みの場合は、その内容をクリア(relax)して再定義に備える
+\makeatletter
+\@ifundefined{Shaded}{
+  \newenvironment{Shaded}{}{}
+}{
+  \let\Shaded\relax
+  \let\endShaded\relax
+}
+\makeatother
+
+% 自分の好きなデザインで「Shaded」を確定させる
+\newenvironment{Shaded}{
   \begin{mdframed}[
-    linecolor=bordergray,    % 枠線の色
-    backgroundcolor=codegray, % 背景色
-    linewidth=0.4pt,          % 枠線の太さ
-    roundcorner=0pt,          % 角を丸めない（直角）
-    innertopmargin=5pt,       % 中の余白（上）
-    innerbottommargin=5pt,    % 中の余白（下）
-    innerleftmargin=5pt,      % 中の余白（左）
-    innerrightmargin=5pt,     % 中の余白（右）
-    skipabove=\medskipamount, % ブロック上の余白
-    skipbelow=\medskipamount, % ブロック下の余白
-    splitbottomskip=5pt,      % ページをまたぐ際のパディング
+    linecolor=bordergray,
+    backgroundcolor=codegray,
+    linewidth=0.4pt,
+    roundcorner=0pt,
+    innertopmargin=5pt,
+    innerbottommargin=5pt,
+    innerleftmargin=5pt,
+    innerrightmargin=5pt,
+    skipabove=\medskipamount,
+    skipbelow=\medskipamount,
+    splitbottomskip=5pt,
     splittopskip=5pt
   ]
 }{
