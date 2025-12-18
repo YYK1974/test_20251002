@@ -12,8 +12,7 @@
 \definecolor{codegray}{rgb}{0.95, 0.95, 0.95}
 
 % PandocのShaded環境をtcolorboxで再定義
-\renewenvironment{Shaded}{
-  \begin{tcolorbox}[
+\tcolorboxenvironment{Shaded}{
     enhanced,
     breakable,
     colback=codegray,      % 背景色を適用
@@ -22,9 +21,5 @@
     sharp corners,         % 角を尖らせる
     nobeforeafter,         % 前後の余白を調整
     left=5pt, right=5pt, top=5pt, bottom=5pt % パディング
-  ]
-}{
-  \end{tcolorbox}
 }
-
 
