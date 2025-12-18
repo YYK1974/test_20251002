@@ -7,19 +7,29 @@
   bmargin=22mm     % 下余白 (例)
 }
 
-\usepackage[most,breakable]{tcolorbox}
-% 背景色に使う色を定義（例：薄いグレー）
+\usepackage[framemethod=default]{mdframed}
+\usepackage{xcolor}
+
+% 色の定義
 \definecolor{codegray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{bordergray}{rgb}{0.6, 0.6, 0.6}
 
-% PandocのShaded環境をtcolorboxで再定義
-\tcolorboxenvironment{Shaded}{
-    enhanced,
-    breakable,
-    colback=codegray,      % 背景色を適用
-    colframe=gray!60,      % 枠線の色（薄いグレー）
-    boxrule=0.4pt,         % 枠線の太さ
-    sharp corners,         % 角を尖らせる
-    nobeforeafter,         % 前後の余白を調整
-    left=5pt, right=5pt, top=5pt, bottom=5pt % パディング
+% Pandocがコードブロックに使用する「Shaded」環境を再定義
+\renewenvironment{Shaded}{
+  \begin{mdframed}[
+    linecolor=bordergray,    % 枠線の色
+    backgroundcolor=codegray, % 背景色
+    linewidth=0.4pt,          % 枠線の太さ
+    roundcorner=0pt,          % 角を丸めない（直角）
+    innertopmargin=5pt,       % 中の余白（上）
+    innerbottommargin=5pt,    % 中の余白（下）
+    innerleftmargin=5pt,      % 中の余白（左）
+    innerrightmargin=5pt,     % 中の余白（右）
+    skipabove=\medskipamount, % ブロック上の余白
+    skipbelow=\medskipamount, % ブロック下の余白
+    splitbottomskip=5pt,      % ページをまたぐ際のパディング
+    splittopskip=5pt
+  ]
+}{
+  \end{mdframed}
 }
-
