@@ -14,20 +14,14 @@
 \definecolor{codegray}{rgb}{0.95, 0.95, 0.95}
 \definecolor{bordergray}{rgb}{0.6, 0.6, 0.6}
 
-% --- エラー回避ロジック ---
-% 1. Shaded環境が未定義の場合は、空の環境を定義する
-% 2. 定義済みの場合は、その内容をクリア(relax)して再定義に備える
+% --- 安全な再定義ロジック ---
 \makeatletter
-\@ifundefined{Shaded}{
-  \newenvironment{Shaded}{}{}
-}{
-  \let\Shaded\relax
-  \let\endShaded\relax
-}
+% 1. まずShaded環境が「未定義」の場合のみ、空の環境を作っておく（エラー回避）
+\@ifundefined{Shaded}{\newenvironment{Shaded}{}{}}{}
 \makeatother
 
-% 自分の好きなデザインで「Shaded」を確定させる
-\newenvironment{Shaded}{
+% 2. 確実に存在する状態になったので、改めて「renewenvironment」で上書きする
+\renewenvironment{Shaded}{
   \begin{mdframed}[
     linecolor=bordergray,
     backgroundcolor=codegray,
