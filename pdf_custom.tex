@@ -14,15 +14,26 @@
 \definecolor{codegray}{rgb}{0.95, 0.95, 0.95}
 \definecolor{bordergray}{rgb}{0.6, 0.6, 0.6}
 
-% --- 安全な再定義ロジック ---
+% コードブロックのカスタマイズ
 \makeatletter
 % 1. まずShaded環境が「未定義」の場合のみ、空の環境を作っておく（エラー回避）
 \@ifundefined{Shaded}{\newenvironment{Shaded}{}{}}{}
-% 画像のデフォルト幅を「本来のサイズ」にする設定
-\def\maxwidth{\Gin@nat@width}
-\def\maxheight{\Gin@nat@height}
-\setkeys{Gin}{width=\Gin@nat@width,keepaspectratio}
 \makeatother
+
+\makeatletter
+%画像の最大幅を設定
+\def\maxwidth{%
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width 
+  \fi
+}
+\setkeys{Gin}{width=0.6\maxwidth,keepaspectratio}
+\makeatother
+
+% すべての画像を「ピクセル数 / 300dpi」相当のサイズで表示する設定
+%\setkeys{Gin}{width=0.3\Gin@nat@width,keepaspectratio}
 
 % 2. 確実に存在する状態になったので、改めて「renewenvironment」で上書きする
 \renewenvironment{Shaded}{
