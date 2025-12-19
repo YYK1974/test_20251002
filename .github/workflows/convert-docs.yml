@@ -47,6 +47,7 @@ jobs:
             --number-sections
             -c pandoc.css
             -c custom.css
+            --embed-resources
             specification.md
 
       # 5. PDF,HTMLアーティファクトのアップロード
