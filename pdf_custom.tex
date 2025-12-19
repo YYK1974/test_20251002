@@ -18,6 +18,10 @@
 \makeatletter
 % 1. まずShaded環境が「未定義」の場合のみ、空の環境を作っておく（エラー回避）
 \@ifundefined{Shaded}{\newenvironment{Shaded}{}{}}{}
+% 画像のデフォルト幅を「本来のサイズ」にする設定
+\def\maxwidth{\Gin@nat@width}
+\def\maxheight{\Gin@nat@height}
+\setkeys{Gin}{width=\Gin@nat@width,keepaspectratio}
 \makeatother
 
 % 2. 確実に存在する状態になったので、改めて「renewenvironment」で上書きする
