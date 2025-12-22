@@ -1,0 +1,1746 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Q-STAR (Quantum STrategic industry Alliance for Revolution)" />
+  <meta name="dcterms.date" content="2025-05-29" />
+  <title>Quantum Open Development Ecosystem (QODE) Optimization Division Specification Document</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="pandoc.css" />
+  <link rel="stylesheet" href="custom.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Quantum Open Development Ecosystem (QODE) Optimization
+Division Specification Document</h1>
+<p class="author">Q-STAR (Quantum STrategic industry Alliance for
+Revolution)</p>
+<p class="date">May 29, 2025</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#overview" id="toc-overview"><span
+class="toc-section-number">1</span> Overview</a></li>
+<li><a href="#system-architecture-and-optimization-steps"
+id="toc-system-architecture-and-optimization-steps"><span
+class="toc-section-number">2</span> System architecture and optimization
+steps</a>
+<ul>
+<li><a href="#create-decision-variables"
+id="toc-create-decision-variables">(1)Create decision variables</a></li>
+<li><a href="#create-objective-function"
+id="toc-create-objective-function">(2) Create objective
+function</a></li>
+<li><a href="#construct-constraints" id="toc-construct-constraints">(3)
+Construct constraints</a></li>
+<li><a href="#formulate-optimization-model"
+id="toc-formulate-optimization-model">(4) Formulate optimization
+model</a></li>
+<li><a href="#specify-solver-client-attributes"
+id="toc-specify-solver-client-attributes">(5) Specify solver client
+attributes</a></li>
+<li><a href="#execute-solver" id="toc-execute-solver">(6) Execute
+solver</a></li>
+</ul></li>
+<li><a href="#decision-variables" id="toc-decision-variables"><span
+class="toc-section-number">3</span> Decision Variables</a>
+<ul>
+<li><a href="#variable-generator" id="toc-variable-generator"><span
+class="toc-section-number">3.1</span> Variable Generator</a></li>
+<li><a href="#methods-and-arguments"
+id="toc-methods-and-arguments"><span
+class="toc-section-number">3.2</span> Methods and Arguments</a>
+<ul>
+<li><a href="#scalar" id="toc-scalar"><span
+class="toc-section-number">3.2.1</span> scalar()</a></li>
+<li><a href="#array" id="toc-array"><span
+class="toc-section-number">3.2.2</span> array()</a></li>
+</ul></li>
+<li><a href="#get-variable-information"
+id="toc-get-variable-information"><span
+class="toc-section-number">3.3</span> Get variable information</a></li>
+<li><a href="#example-code" id="toc-example-code"><span
+class="toc-section-number">3.4</span> Example code</a></li>
+</ul></li>
+<li><a href="#polynomials" id="toc-polynomials"><span
+class="toc-section-number">4</span> Polynomials</a>
+<ul>
+<li><a href="#arithmetic-of-polynomial"
+id="toc-arithmetic-of-polynomial"><span
+class="toc-section-number">4.1</span> Arithmetic of polynomial</a></li>
+<li><a href="#arithmetic-of-polynomial-arrays"
+id="toc-arithmetic-of-polynomial-arrays"><span
+class="toc-section-number">4.2</span> Arithmetic of polynomial
+arrays</a></li>
+<li><a href="#attributes-and-methods-of-polynomial"
+id="toc-attributes-and-methods-of-polynomial"><span
+class="toc-section-number">4.3</span> Attributes and methods of
+polynomial</a></li>
+<li><a href="#example-code-1" id="toc-example-code-1"><span
+class="toc-section-number">4.4</span> Example code</a></li>
+</ul></li>
+<li><a href="#constraints" id="toc-constraints"><span
+class="toc-section-number">5</span> Constraints</a>
+<ul>
+<li><a href="#fix-values" id="toc-fix-values"><span
+class="toc-section-number">5.1</span> Fix values</a></li>
+<li><a href="#limit-the-range-of-variable-values"
+id="toc-limit-the-range-of-variable-values"><span
+class="toc-section-number">5.2</span> Limit the range of variable
+values</a></li>
+<li><a href="#limit-the-range-of-polynomial-values"
+id="toc-limit-the-range-of-polynomial-values"><span
+class="toc-section-number">5.3</span> Limit the range of polynomial
+values</a>
+<ul>
+<li><a href="#equality-constraints" id="toc-equality-constraints"><span
+class="toc-section-number">5.3.1</span> Equality constraints</a></li>
+<li><a href="#inequality-constraints"
+id="toc-inequality-constraints"><span
+class="toc-section-number">5.3.2</span> Inequality constraints</a></li>
+<li><a href="#constraint-list" id="toc-constraint-list"><span
+class="toc-section-number">5.3.3</span> Constraint list</a></li>
+<li><a href="#constraint-weights" id="toc-constraint-weights"><span
+class="toc-section-number">5.3.4</span> Constraint weights</a></li>
+</ul></li>
+<li><a href="#example-code-2" id="toc-example-code-2"><span
+class="toc-section-number">5.4</span> Example code</a></li>
+</ul></li>
+<li><a href="#model" id="toc-model"><span
+class="toc-section-number">6</span> Model</a>
+<ul>
+<li><a href="#model-class" id="toc-model-class"><span
+class="toc-section-number">6.1</span> Model class</a></li>
+<li><a href="#model-attributes" id="toc-model-attributes"><span
+class="toc-section-number">6.2</span> Model attributes</a></li>
+<li><a href="#example-code-3" id="toc-example-code-3"><span
+class="toc-section-number">6.3</span> Example code</a></li>
+</ul></li>
+<li><a href="#solver-client" id="toc-solver-client"><span
+class="toc-section-number">7</span> Solver Client</a></li>
+<li><a href="#solver-execution" id="toc-solver-execution"><span
+class="toc-section-number">8</span> Solver Execution</a>
+<ul>
+<li><a href="#solve-function" id="toc-solve-function"><span
+class="toc-section-number">8.1</span> Solve function</a></li>
+<li><a href="#retrieving-the-result"
+id="toc-retrieving-the-result"><span
+class="toc-section-number">8.2</span> Retrieving the result</a></li>
+<li><a href="#example-code-4" id="toc-example-code-4"><span
+class="toc-section-number">8.3</span> Example code</a></li>
+</ul></li>
+<li><a href="#references" id="toc-references"><span
+class="toc-section-number">9</span> References</a>
+<ul>
+<li><a href="#algebraic-classes-and-numerics"
+id="toc-algebraic-classes-and-numerics"><span
+class="toc-section-number">9.1</span> Algebraic classes and numerics</a>
+<ul>
+<li><a href="#sdk.poly-class" id="toc-sdk.poly-class"><span
+class="toc-section-number">9.1.1</span> SDK.<strong>Poly</strong>
+class</a></li>
+<li><a href="#sdk.polyarray-class" id="toc-sdk.polyarray-class"><span
+class="toc-section-number">9.1.2</span> SDK.<strong>PolyArray</strong>
+class</a></li>
+<li><a href="#sdk.variable-class" id="toc-sdk.variable-class"><span
+class="toc-section-number">9.1.3</span> SDK.<strong>Variable</strong>
+class</a></li>
+<li><a href="#sdk.variablegenerator-class"
+id="toc-sdk.variablegenerator-class"><span
+class="toc-section-number">9.1.4</span>
+SDK.<strong>VariableGenerator</strong> class</a></li>
+<li><a href="#sdk.sum-function" id="toc-sdk.sum-function"><span
+class="toc-section-number">9.1.5</span> SDK.<strong>sum()</strong>
+function</a></li>
+<li><a href="#sdk.variabletype-enum-class"
+id="toc-sdk.variabletype-enum-class"><span
+class="toc-section-number">9.1.6</span>
+SDK.<strong>VariableType</strong> enum class</a></li>
+</ul></li>
+<li><a href="#constraints-1" id="toc-constraints-1"><span
+class="toc-section-number">9.2</span> Constraints</a>
+<ul>
+<li><a href="#sdk.constraint-class" id="toc-sdk.constraint-class"><span
+class="toc-section-number">9.2.1</span> SDK.<strong>Constraint</strong>
+class</a></li>
+<li><a href="#sdk.constraintlist-class"
+id="toc-sdk.constraintlist-class"><span
+class="toc-section-number">9.2.2</span>
+SDK.<strong>ConstraintList</strong> class</a></li>
+<li><a href="#functions" id="toc-functions"><span
+class="toc-section-number">9.2.3</span> Functions</a></li>
+</ul></li>
+<li><a href="#model-classes-and-functions"
+id="toc-model-classes-and-functions"><span
+class="toc-section-number">9.3</span> Model classes and functions</a>
+<ul>
+<li><a href="#sdk.model-class" id="toc-sdk.model-class"><span
+class="toc-section-number">9.3.1</span> SDK.<strong>Model</strong>
+class</a></li>
+</ul></li>
+<li><a href="#solve-solve-classes-and-functions"
+id="toc-solve-solve-classes-and-functions"><span
+class="toc-section-number">9.4</span> Solve (Solve classes and
+functions)</a>
+<ul>
+<li><a href="#sdk.result.solution-class"
+id="toc-sdk.result.solution-class"><span
+class="toc-section-number">9.4.1</span>
+SDK.<strong>Result.Solution</strong> class</a></li>
+<li><a href="#sdk.result-class" id="toc-sdk.result-class"><span
+class="toc-section-number">9.4.2</span> SDK.<strong>Result</strong>
+class</a></li>
+<li><a href="#sdk.result.values-class"
+id="toc-sdk.result.values-class"><span
+class="toc-section-number">9.4.3</span> SDK.Result.Values class</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+<h1 data-number="1" id="overview"><span
+class="header-section-number">1</span> Overview</h1>
+<p>This document describes an interface specification of a software
+development kit, hereinafter referred to as “the SDK,” which is designed
+to solve a wide variety of combinatorial optimization problems.<br />
+This SDK is part of a software ecosystem designed to uniformly handle
+quantum computers including quantum annealing machines and quantum gate
+computers, shown in Fig.1. While its primary application currently
+targets mathematical optimization problems, it is expected to encompass
+quantum chemistry calculations and other applications in the future.</p>
+<figure id="fig:ecosystem">
+<img src="./img/Fig1.png"
+alt="A schematic ecosystem for quantum computing" />
+<figcaption aria-hidden="true">A schematic ecosystem for quantum
+computing</figcaption>
+</figure>
+<p>The specification will cover the following items.</p>
+<ul>
+<li>Assumed system architecture<br />
+</li>
+<li>Process of creating (formulating) a model and obtaining a
+solution<br />
+</li>
+<li>Specification of arguments and return values of functions and
+classes required for formulation<br />
+</li>
+<li>Specifications of processing performed by functions and class
+methods</li>
+</ul>
+<p>On the other hand, the specification will NOT cover the following
+items.</p>
+<ul>
+<li>Algorithms and hardware specifications for calculations<br />
+</li>
+<li>Non-Python library specifications</li>
+</ul>
+<p>The SDK assumes Python as its runtime environment. Therefore,
+although attributes are described in the documentation, it is acceptable
+to implement them as properties.</p>
+<h1 data-number="2"
+id="system-architecture-and-optimization-steps"><span
+class="header-section-number">2</span> System architecture and
+optimization steps</h1>
+<p>This specification assumes the following system architecture, shown
+in Fig.2.</p>
+<figure id="fig:system-architecture">
+<img src="./img/Fig2.svg"
+alt="A schematic system architecture assumed in this specification" />
+<figcaption aria-hidden="true">A schematic system architecture assumed
+in this specification</figcaption>
+</figure>
+<p>The SDK MUST be able to perform optimization by formulating a
+combinatorial optimization problem using the following steps:</p>
+<h3 class="unnumbered" id="create-decision-variables">(1)Create decision
+variables</h3>
+<p>First, create a generator (<strong>VariableGenerator</strong>) that
+creates decision variables. Next, create a variable
+(<strong>Poly</strong>) or an array of variables
+(<strong>PolyArray</strong>) using the
+<strong>VariableGenerator</strong>.</p>
+<h3 class="unnumbered" id="create-objective-function">(2) Create
+objective function</h3>
+<p>Define the objective function (<strong>Poly</strong>) using the
+variables generated by the <strong>VariableGenerator</strong>.</p>
+<h3 class="unnumbered" id="construct-constraints">(3) Construct
+constraints</h3>
+<p>Construct constraints (<strong>Constraint</strong>) from polynomials
+using constraint creation functions. If multiple constraints are needed,
+combine them into a constraint list
+(<strong>ConstraintList</strong>).</p>
+<h3 class="unnumbered" id="formulate-optimization-model">(4) Formulate
+optimization model</h3>
+<p>Create the optimization model (<strong>Model</strong>) from the
+objective function and constraints.</p>
+<h3 class="unnumbered" id="specify-solver-client-attributes">(5) Specify
+solver client attributes</h3>
+<p>Specify a machine or solver to use and create a solver client.</p>
+<h3 class="unnumbered" id="execute-solver">(6) Execute solver</h3>
+<p>Pass the optimization model and solver client, and run the
+optimization through the solve function. The result of the execution is
+returned as <strong>Result</strong>, and the objective function value
+and the variables of the optimal solution can be obtained.</p>
+<h1 data-number="3" id="decision-variables"><span
+class="header-section-number">3</span> Decision Variables</h1>
+<p>The SDK MUST support the following classes and methods to determine
+the decision variables.</p>
+<h2 data-number="3.1" id="variable-generator"><span
+class="header-section-number">3.1</span> Variable Generator</h2>
+<p>The <strong>VariableGenerator</strong> class generates decision
+variables. This class MUST support the following methods.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Return type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">scalar()</td>
+<td style="text-align: left;"><strong>Poly</strong></td>
+<td style="text-align: left;">Create a single variable</td>
+</tr>
+<tr>
+<td style="text-align: left;">array()</td>
+<td style="text-align: left;"><strong>PolyArray</strong></td>
+<td style="text-align: left;">Create multiple variables</td>
+</tr>
+</tbody>
+</table>
+<h2 data-number="3.2" id="methods-and-arguments"><span
+class="header-section-number">3.2</span> Methods and Arguments</h2>
+<p>The above methods MUST support the following types of decision
+variables as arguments.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Argument</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Variable type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">variable_type</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">“Binary”</td>
+<td style="text-align: left;">A variable taking the value 0 or 1</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">“Ising”</td>
+<td style="text-align: left;">A variable taking the value -1 or 1</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">“Integer”</td>
+<td style="text-align: left;">A variable taking an integer value</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">“Real”</td>
+<td style="text-align: left;">A variable taking a real value</td>
+</tr>
+</tbody>
+</table>
+<p>The above methods MUST also support the following arguments.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Argument</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">name</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">Specify the name of the variables</td>
+</tr>
+<tr>
+<td style="text-align: left;">bounds</td>
+<td style="text-align: left;">tuple(number, number)</td>
+<td style="text-align: left;">[Integer or real variable only] Specify
+the range of possible values</td>
+</tr>
+</tbody>
+</table>
+<h3 data-number="3.2.1" id="scalar"><span
+class="header-section-number">3.2.1</span> scalar()</h3>
+<p>Define the <strong>scalar()</strong> method that creates a single
+variable. The variable MUST be returned as an instance of the
+<strong>Poly</strong> class, which represents the polynomial of the
+variable.</p>
+<h3 data-number="3.2.2" id="array"><span
+class="header-section-number">3.2.2</span> array()</h3>
+<p>Define the <strong>array()</strong> method that creates multiple
+variables at once. An array of variables (NumPy-like multidimensional
+array format) MUST be returned as an instance of the
+<strong>PolyArray</strong> class, which represents the polynomial array
+of the variable. This method MUST support the following argument to
+specify the shape of the array.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Argument</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">shape</td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">tuple[int, …]</td>
+</tr>
+</tbody>
+</table>
+<p>Once the new variables are created, the names MUST be automatically
+appended with a string representing the array index. The elements and
+slices MUST be retrievable in the same way as a Python list or NumPy
+array. The lower and upper bounds for variables MUST be specified
+collectively at the time of creation.</p>
+<h2 data-number="3.3" id="get-variable-information"><span
+class="header-section-number">3.3</span> Get variable information</h2>
+<p>Define the <strong>as_variable()</strong> method that gets
+information about generated variables. The following information MUST be
+supported by this method.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Attribute</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">name</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">Variable name</td>
+</tr>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">Variable ID number An integer value
+assigned starting from 0 in order of issuance</td>
+</tr>
+<tr>
+<td style="text-align: left;">type</td>
+<td style="text-align: left;"><strong>VariableType</strong></td>
+<td style="text-align: left;">Variable type</td>
+</tr>
+<tr>
+<td style="text-align: left;">lower_bound</td>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">[Integer or real variable only] Variable
+lower bound <em>None</em> means -<span class="math inline">∞</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">upper_bound</td>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">[Integer or real variable only] Variable
+upper bound <em>None</em> means +<span class="math inline">∞</span></td>
+</tr>
+</tbody>
+</table>
+<p>The information about variables issued by the
+<strong>VariableGenerator</strong> class MUST be retrievable by using
+the <strong>variables</strong> attribute. The names, lower bounds, and
+upper bounds of variables MUST be modifiable later.</p>
+<h2 data-number="3.4" id="example-code"><span
+class="header-section-number">3.4</span> Example code</h2>
+<p>In the example code, the library name is represented as “SDK,” but
+you should replace it with the actual library name as appropriate. The
+same applies to the following example codes.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> SDK <span class="im">import</span> VariableGenerator</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>gen <span class="op">=</span> VariableGenerator()</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> gen.scalar(<span class="st">&quot;Binary&quot;</span>)                <span class="co"># print(q) -&gt; q_0</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> gen.scalar(<span class="st">&quot;Ising&quot;</span>, name<span class="op">=</span><span class="st">&quot;is&quot;</span>)      <span class="co"># print(i) -&gt; is</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> gen.scalar(<span class="st">&quot;Real&quot;</span>, bounds<span class="op">=</span>(<span class="fl">2.0</span>, <span class="fl">3.0</span>))   <span class="co"># 2.0 &lt;= r &lt;= 3.0</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>q_arr <span class="op">=</span> gen.array(<span class="st">&quot;Integer&quot;</span>, <span class="dv">3</span>, bounds<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">print(q_arr) -&gt; [q_0, q_1, q_2]</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">print(q_arr[0]) -&gt; q_0</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">print(q_arr[:2]) -&gt; [q_0, q_1]</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>q_mlt_arr <span class="op">=</span> gen.array(<span class="st">&quot;Binary&quot;</span>, shape<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">3</span>))</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">print(q_mlt_arr) -&gt; </span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">[[q_{0,0}, q_{0,1}, q_{0,2}],</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">   [q_{1,0}, q_{1,1}, q_{1,2}]]</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">print(q_mlt_arr[0, 0]) -&gt; q_{0,0}</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">print(q_mlt_arr[0, :]) -&gt; [q_{0,0}, q_{0,1}, q_{0,2}]</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># print(q.as_variable()) -&gt; {name: q_0, id: 0, type: Binary}</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="bu">vars</span> <span class="op">=</span> gen.variables</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co">print(vars) -&gt;</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">[Variable({name: q_0, id: 0, type: Binary}),</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co"> Variable({name: is, id: 1, type: Ising}),</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co"> Variable({name: r_0, id: 2, type: Real, lower_bound: 2, upper_bound: 3})]</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="bu">vars</span>[<span class="dv">2</span>].name <span class="op">=</span> <span class="st">&quot;r&quot;</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="bu">vars</span>[<span class="dv">2</span>].lower_bound <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co">print(vars[2]) -&gt;</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co">{name: r, id: 2, type: Real, lower_bound: 0, upper_bound: 3}</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span></code></pre></div>
+<h1 data-number="4" id="polynomials"><span
+class="header-section-number">4</span> Polynomials</h1>
+<p>The SDK MUST support the following classes and methods to determine
+the polynomials. The SDK MUST be able to use the polynomial created as
+an objective function of a combinatorial optimization problem without
+modification.</p>
+<h2 data-number="4.1" id="arithmetic-of-polynomial"><span
+class="header-section-number">4.1</span> Arithmetic of polynomial</h2>
+<p>The SDK MUST support the creation of polynomial expressions by
+performing quadrature operations and exponentiation on variables created
+by <strong>VariableGenerator</strong>. It MUST be able to include
+variables from different arrays or of different types within the same
+polynomial, provided they were all created by the same
+<strong>VariableGenerator</strong>.<br />
+The SDK MUST also support the following logical operators.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Operator</th>
+<th style="text-align: left;">Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">&amp; (logical AND)</td>
+<td style="text-align: left;">x &amp; y is equivalent to x * y.</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">(logical OR)</td>
+</tr>
+<tr>
+<td style="text-align: left;">^ (exclusive OR)</td>
+<td style="text-align: left;">x ^ y is equivalent to -2 * x * y + x +
+y.</td>
+</tr>
+</tbody>
+</table>
+<h2 data-number="4.2" id="arithmetic-of-polynomial-arrays"><span
+class="header-section-number">4.2</span> Arithmetic of polynomial
+arrays</h2>
+<p>The SDK MUST provide the <strong>sum()</strong> method that creates
+polynomial expressions from <strong>PolyArray</strong>.
+<strong>PolyArray</strong> MUST also be able to perform quadratic
+operations with numbers and NumPy arrays.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Argument</th>
+<th style="text-align: left;">Return type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">sum()</td>
+<td style="text-align: left;">axis = None</td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">tuple[int, …]</td>
+</tr>
+</tbody>
+</table>
+<h2 data-number="4.3" id="attributes-and-methods-of-polynomial"><span
+class="header-section-number">4.3</span> Attributes and methods of
+polynomial</h2>
+<p>Polynomial class <strong>Poly</strong> MUST support the following
+methods and attributes to get and change information about
+polynomials.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Method / Attribute</th>
+<th style="text-align: left;">Return type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">degree()</td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">Degree of the polynomial</td>
+</tr>
+<tr>
+<td style="text-align: left;">is_number() / is_linear() /
+is_quadratic()</td>
+<td style="text-align: left;">bool</td>
+<td style="text-align: left;">Whether the polynomial is below a certain
+degree</td>
+</tr>
+<tr>
+<td style="text-align: left;">is_variable()</td>
+<td style="text-align: left;">bool</td>
+<td style="text-align: left;">Whether the polynomial can be considered a
+single variable i.e. a one-dimensional monomial with coefficient 1</td>
+</tr>
+<tr>
+<td style="text-align: left;">variables</td>
+<td style="text-align: left;">list[<strong>Variables</strong>]</td>
+<td style="text-align: left;">Information about all variables in the
+polynomial</td>
+</tr>
+<tr>
+<td style="text-align: left;">substitute()</td>
+<td style="text-align: left;"><strong>Poly</strong></td>
+<td style="text-align: left;">The result of assigning numbers or other
+polynomials to variables of a polynomial expression</td>
+</tr>
+</tbody>
+</table>
+<h2 data-number="4.4" id="example-code-1"><span
+class="header-section-number">4.4</span> Example code</h2>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> SDK <span class="im">import</span> VariableGenerator</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>gen <span class="op">=</span> VariableGenerator()</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> gen.array(<span class="st">&quot;Binary&quot;</span>, <span class="dv">6</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="op">-</span>q[<span class="dv">0</span>] <span class="op">+</span> <span class="fl">2.3</span> <span class="op">*</span> q[<span class="dv">1</span>] <span class="op">*</span> q[<span class="dv">2</span>] <span class="op">-</span> (q[<span class="dv">3</span>] <span class="op">+</span> q[<span class="dv">4</span>]) <span class="op">**</span> <span class="dv">2</span> <span class="op">*</span> q[<span class="dv">5</span>]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># print(p) -&gt; - 2 q_3 q_4 q_5 + 2.3 q_1 q_2 - q_3 q_5 - q_4 q_5 - q_0</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> gen.array(<span class="st">&quot;Binary&quot;</span>, <span class="dv">3</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> gen.array(<span class="st">&quot;Ising&quot;</span>, <span class="dv">2</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> gen.scalar(<span class="st">&quot;Integer&quot;</span>, bounds<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> q[<span class="dv">0</span>] <span class="op">+</span> s[<span class="dv">1</span>] <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> n</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># print(p) -&gt; q_0 + s_1 - 2 n_0</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> gen.array(<span class="st">&quot;Binary&quot;</span>, shape<span class="op">=</span>(<span class="dv">3</span>, <span class="dv">3</span>))</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">print(q.sum()) -&gt; </span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">   q_{0,0} + q_{0,1} + q_{0,2} + q_{1,0} + q_{1,1} + q_{1,2} + q_{2,0} + q_{2,1} + q_{2,2}</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">print(q.sum(axis=1)) -&gt;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co">   [q_{0,0} + q_{0,1} + q_{0,2},</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co">    q_{1,0} + q_{1,1} + q_{1,2},</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co">    q_{2,0} + q_{2,1} + q_{2,2}]</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co">print(q.sum(axis=0)) -&gt;</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co">   [q_{0,0} + q_{1,0} + q_{2,0},</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"> q_{0,1} + q_{1,1} + q_{2,1},</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co"> q_{0,2} + q_{1,2} + q_{2,2}]</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co">print(2 * q) -&gt; </span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co">   [[2 q_{0,0}, 2 q_{0,1}, 2 q_{0,2}],</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co"> [2 q_{1,0}, 2 q_{1,1}, 2 q_{1,2}],</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co"> [2 q_{2,0}, 2 q_{2,1}, 2 q_{2,2}]]</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>],[<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>],[<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>]])</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="co">print(q * a) -&gt; </span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co">   [[  q_{0,0}, 2 q_{0,1}, 3 q_{0,2}],</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="co"> [4 q_{1,0}, 5 q_{1,1}, 6 q_{1,2}],</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="co"> [7 q_{2,0}, 8 q_{2,1}, 9 q_{2,2}]]</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> gen.array(<span class="st">&quot;Binary&quot;</span>, <span class="dv">4</span>)</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> q[<span class="dv">0</span>] <span class="op">*</span> q[<span class="dv">1</span>]</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="co">p.degree() -&gt; 2</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="co">p.is_number() -&gt; False</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="co">p.is_linear() -&gt; False</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="co">p.is_quadratic() -&gt; True</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="co">q[0].is_variable() -&gt; True</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="co">(q[0] + 1).is_variable() -&gt; True</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="co">(2 * q[0]).is_variable() -&gt; False</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="co">(q[0] + 2 * q[1]).variables -&gt; </span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="co">   [Variable({name: q_0, id: 0, type: Binary}),</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="co"> Variable({name: q_1, id: 1, type: Binary})]</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> q[<span class="dv">0</span>] <span class="op">+</span> q[<span class="dv">1</span>]</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="co">print((q[0] + q[1]).substitute({q[0]: 1, q[1]: 0})) -&gt; 1</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="co">print((q[0] + q[1]).substitute({q[0]: 1})) -&gt; q_1 + 1</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="co">print((q[0] + q[1]).substitute({q[1]: q[2] * q[3]})) -&gt; q_2 q_3 + q_0</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a><span class="co">print(q.substitute({q[0]: 1, q[1]: 0})) -&gt; [  1,   0, q_2, q_3]</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a><span class="co">print(q.substitute({q[1]: q[2] * q[3]})) -&gt; [  q_0, q_2 q_3,  q_2,  q_3]</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span></code></pre></div>
+<h1 data-number="5" id="constraints"><span
+class="header-section-number">5</span> Constraints</h1>
+<p>The SDK MUST support setting constraints on the range of possible
+values for each variable, as well as constraints on the range of
+possible values for polynomial expressions. The SDK MUST support the
+following classes, methods, and operations for setting constraints on
+decision variables and for constructing constraint objects using
+polynomials.</p>
+<h2 data-number="5.1" id="fix-values"><span
+class="header-section-number">5.1</span> Fix values</h2>
+<p>The SDK MUST support fixing the values of decision variables, by
+replacing part of the variable array with numeric values in advance. The
+SDK MUST also support imposing a constraint where a polynomial with
+another variable represents a variable by replacing part of the variable
+array with a polynomial.</p>
+<h2 data-number="5.2" id="limit-the-range-of-variable-values"><span
+class="header-section-number">5.2</span> Limit the range of variable
+values</h2>
+<p>See chapter <a href="#methods-and-arguments">Methods and
+Arguments</a></p>
+<h2 data-number="5.3" id="limit-the-range-of-polynomial-values"><span
+class="header-section-number">5.3</span> Limit the range of polynomial
+values</h2>
+<p>The SDK MUST manage equality, inequality, and other expressions
+representing constraints on the range of possible polynomial values as
+constraint objects of the <strong>Constraint</strong> class.</p>
+<h3 data-number="5.3.1" id="equality-constraints"><span
+class="header-section-number">5.3.1</span> Equality constraints</h3>
+<p>The SDK MUST support the following helper functions to create
+constraint objects that represent equalities. The SDK MUST support
+assigning labels to these constraints.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Helper function</th>
+<th style="text-align: left;">Arguments</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">equal_to()</td>
+<td style="text-align: left;"><strong>Poly</strong></td>
+<td style="text-align: left;"><strong>PolyArray</strong>, float</td>
+</tr>
+<tr>
+<td style="text-align: left;">one_hot()</td>
+<td style="text-align: left;"><strong>Poly</strong></td>
+<td style="text-align: left;"><strong>PolyArray</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 data-number="5.3.2" id="inequality-constraints"><span
+class="header-section-number">5.3.2</span> Inequality constraints</h3>
+<p>The SDK MUST support the following helper functions to create
+constraint objects representing inequalities. The SDK MUST support
+assigning labels to these constraints.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Helper function</th>
+<th style="text-align: left;">Arguments</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">less_equal()</td>
+<td style="text-align: left;"><strong>Poly</strong></td>
+<td style="text-align: left;"><strong>PolyArray</strong>, float</td>
+</tr>
+<tr>
+<td style="text-align: left;">greater_equal()</td>
+<td style="text-align: left;"><strong>Poly</strong></td>
+<td style="text-align: left;"><strong>PolyArray</strong>, float</td>
+</tr>
+<tr>
+<td style="text-align: left;">clamp()</td>
+<td style="text-align: left;"><strong>Poly</strong></td>
+<td style="text-align: left;"><strong>PolyArray</strong>, tuple[float,
+float]</td>
+</tr>
+</tbody>
+</table>
+<h3 data-number="5.3.3" id="constraint-list"><span
+class="header-section-number">5.3.3</span> Constraint list</h3>
+<p>The SDK MUST support the handling of multiple constraints as a
+<strong>ConstraintList</strong>. The SDK MUST also support an empty
+<strong>ConstraintList</strong> object. A
+<strong>ConstraintList</strong> object MUST be generated by adding
+<strong>Constraint</strong> objects together.
+<strong>ConstraintList</strong> MUST also support adding a
+<strong>Constraint</strong> object using the + or += operator.</p>
+<h3 data-number="5.3.4" id="constraint-weights"><span
+class="header-section-number">5.3.4</span> Constraint weights</h3>
+<p>Multiplying a <strong>Constraint</strong> object by a number MUST
+multiply its weight. Multiplication by numbers for
+<strong>weight</strong> MUST also be defined for
+<strong>ConstraintList</strong> objects. <strong>Constraint</strong>
+MUST support the <strong>weight</strong> attribute to obtain and set the
+weight of a constraint object. The default value of
+<strong>weight</strong> MUST be 1.</p>
+<h2 data-number="5.4" id="example-code-2"><span
+class="header-section-number">5.4</span> Example code</h2>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> SDK <span class="im">import</span> VariableGenerator, equal_to, one_hot, less_equal, greater_equal, clamp</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>gen <span class="op">=</span> VariableGenerator()</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> gen.array(<span class="st">&quot;Binary&quot;</span>, shape<span class="op">=</span>(<span class="dv">3</span>, <span class="dv">3</span>))</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>q[<span class="dv">0</span>, :] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>q[:, <span class="dv">0</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>q[<span class="dv">0</span>, <span class="dv">0</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">print(q) -&gt; </span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">   [[      1,       0,       0],</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"> [      0, q_{1,1}, q_{1,2}],</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"> [      0, q_{2,1}, q_{2,2}]]</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> q.<span class="bu">sum</span>() <span class="co"># print(p) -&gt; q_{1,1} + q_{1,2} + q_{2,1} + q_{2,2} + 1</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>q[<span class="dv">2</span>, <span class="dv">2</span>] <span class="op">=</span> q[<span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">print(q) -&gt; </span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co">   [[      1,       0,       0],</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co"> [      0, q_{1,1}, q_{1,2}],</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co"> [      0, q_{2,1}, q_{1,1}]]</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> gen.array(<span class="st">&quot;Binary&quot;</span>, shape<span class="op">=</span>(<span class="dv">3</span>, <span class="dv">3</span>))</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> equal_to(q[<span class="dv">0</span>, <span class="dv">0</span>] <span class="op">+</span> q[<span class="dv">1</span>, <span class="dv">1</span>] <span class="op">+</span> q[<span class="dv">2</span>, <span class="dv">2</span>], <span class="dv">1</span>)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co"># print(c) -&gt; q_{0,0} + q_{1,1} + q_{2,2} == 1 (weight: 1)</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> equal_to(q[<span class="dv">0</span>, <span class="dv">0</span>] <span class="op">+</span> q[<span class="dv">1</span>, <span class="dv">1</span>] <span class="op">+</span> q[<span class="dv">2</span>, <span class="dv">2</span>], <span class="dv">1</span>, label<span class="op">=</span><span class="st">&quot;diagonal sum&quot;</span>)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="co"># print(c) -&gt; diagonal sum: q_{0,0} + q_{1,1} + q_{2,2} == 1 (weight: 1)</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> equal_to(q[<span class="dv">0</span>], <span class="dv">1</span>, label<span class="op">=</span><span class="st">&quot;1st row sum&quot;</span>)</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="co"># print(c) -&gt; 1st row sum: q_{0,0} + q_{0,1} + q_{0,2} == 1 (weight: 1)</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> one_hot(q[<span class="dv">0</span>], label<span class="op">=</span><span class="st">&quot;1st row one-hot&quot;</span>)</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="co"># print(c) -&gt; 1st row one-hot: q_{0,0} + q_{0,1} + q_{0,2} == 1 (weight: 1)</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>c_le <span class="op">=</span> less_equal(q[<span class="dv">0</span>], <span class="dv">2</span>)</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>c_ge <span class="op">=</span> greater_equal(q[<span class="dv">0</span>], <span class="dv">2</span>)</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>c_bw <span class="op">=</span> clamp(q[<span class="dv">0</span>], (<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="co">print(c_le) -&gt; q_{0,0} + q_{0,1} + q_{0,2} &lt;= 2 (weight: 1)</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="co">print(c_ge) -&gt; q_{0,0} + q_{0,1} + q_{0,2} &gt;= 2 (weight: 1)</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="co">print(c_bw) -&gt; 1 &lt;= q_{0,0} + q_{0,1} + q_{0,2} &lt;= 2 (weight: 1)</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> gen.array(<span class="st">&quot;Binary&quot;</span>, shape<span class="op">=</span>(<span class="dv">3</span>, <span class="dv">3</span>))</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>c0 <span class="op">=</span> equal_to(q[<span class="dv">0</span>], <span class="dv">1</span>)</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>c1 <span class="op">=</span> equal_to(q[<span class="dv">1</span>], <span class="dv">1</span>)</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>clist <span class="op">=</span> c0 <span class="op">+</span> c1</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a><span class="co">print(clist) -&gt; </span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="co">   [q_{0,0} + q_{0,1} + q_{0,2} == 1 (weight: 1),</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a><span class="co">    q_{1,0} + q_{1,1} + q_{1,2} == 1 (weight: 1)]</span></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>clist <span class="op">+=</span> equal_to(q[<span class="dv">2</span>], <span class="dv">1</span>)</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="co">print(clist) -&gt; </span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="co">   [q_{0,0} + q_{0,1} + q_{0,2} == 1 (weight: 1),</span></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a><span class="co"> q_{1,0} + q_{1,1} + q_{1,2} == 1 (weight: 1),</span></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a><span class="co"> q_{2,0} + q_{2,1} + q_{2,2} == 1 (weight: 1)]</span></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> gen.array(<span class="st">&quot;Binary&quot;</span>, shape<span class="op">=</span>(<span class="dv">3</span>, <span class="dv">3</span>))</span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> equal_to(q[<span class="dv">0</span>, <span class="dv">0</span>] <span class="op">+</span> q[<span class="dv">1</span>, <span class="dv">1</span>] <span class="op">+</span> q[<span class="dv">2</span>, <span class="dv">2</span>], <span class="dv">1</span>)    <span class="co"># print(c.weight) -&gt; 1.0</span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>c.weight <span class="op">=</span> <span class="dv">3</span>        <span class="co"># print(c.weight) -&gt; 3.0</span></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>c.weight <span class="op">*=</span> <span class="dv">2</span>       <span class="co"># print(c.weight) -&gt; 6.0</span></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>c1 <span class="op">=</span> equal_to(q[<span class="dv">0</span>], <span class="dv">1</span>)</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>c2 <span class="op">=</span> equal_to(q[<span class="dv">1</span>], <span class="dv">1</span>)</span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>clist <span class="op">=</span> c1 <span class="op">+</span> c2</span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a><span class="co">print(clist) -&gt;</span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a><span class="co">[q_{0,0} + q_{0,1} + q_{0,2} == 1 (weight: 1),</span></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a><span class="co"> q_{1,0} + q_{1,1} + q_{1,2} == 1 (weight: 1)]</span></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>clist <span class="op">*=</span> <span class="dv">2</span></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a><span class="co">print(clist) -&gt;</span></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="co">[q_{0,0} + q_{0,1} + q_{0,2} == 1 (weight: 2),</span></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a><span class="co"> q_{1,0} + q_{1,1} + q_{1,2} == 1 (weight: 2)]</span></span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span></code></pre></div>
+<h1 data-number="6" id="model"><span
+class="header-section-number">6</span> Model</h1>
+<p>The SDK MUST support the following classes, methods, and operations
+to formulate the combinatorial optimization problem using decision
+variables, objective functions, and constraints.</p>
+<h2 data-number="6.1" id="model-class"><span
+class="header-section-number">6.1</span> Model class</h2>
+<p>The SDK MUST represent combinatorial optimization problems as
+instances of the <strong>Model</strong> class. The
+<strong>Model</strong> class constructor MUST accept
+<strong>Poly</strong> or/and <strong>Constraint /
+ConstraintList</strong> as arguments to represent the problem.
+<strong>Model</strong> objects MUST also be generated by adding
+<strong>Poly</strong> and <strong>Constraint /
+ConstraintList</strong>.</p>
+<h2 data-number="6.2" id="model-attributes"><span
+class="header-section-number">6.2</span> Model attributes</h2>
+<p>The <strong>Model</strong> class MUST provide the following
+attributes.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Attribute</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">objective</td>
+<td style="text-align: left;"><strong>Poly</strong></td>
+<td style="text-align: left;">The objective function of the model</td>
+</tr>
+<tr>
+<td style="text-align: left;">constraints</td>
+<td style="text-align: left;"><strong>ConstraintList</strong></td>
+<td style="text-align: left;">Constraints of the model</td>
+</tr>
+</tbody>
+</table>
+<h2 data-number="6.3" id="example-code-3"><span
+class="header-section-number">6.3</span> Example code</h2>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> SDK <span class="im">import</span> VariableGenerator, Model, equal_to, one_hot</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>gen <span class="op">=</span> VariableGenerator()</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> gen.array(<span class="st">&quot;Binary&quot;</span>, shape<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">3</span>))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>objective <span class="op">=</span> q[<span class="dv">0</span>, <span class="dv">0</span>] <span class="op">*</span> q[<span class="dv">0</span>, <span class="dv">1</span>] <span class="op">-</span> q[<span class="dv">0</span>, <span class="dv">2</span>]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>constraint1 <span class="op">=</span> equal_to(q[<span class="dv">0</span>, <span class="dv">0</span>] <span class="op">+</span> q[<span class="dv">0</span>, <span class="dv">1</span>] <span class="op">-</span> q[<span class="dv">0</span>, <span class="dv">2</span>], <span class="dv">0</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>constraint2 <span class="op">=</span> one_hot(q[<span class="dv">1</span>, :])</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>constraint_list <span class="op">=</span> constraint1 <span class="op">+</span> constraint2</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> objective <span class="op">+</span> constraint1</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">print(model) -&gt; </span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">minimize:</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">     q_{0,0} q_{0,1} - q_{0,2}</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co">subject to:</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">  q_{0,0} + q_{0,1} - q_{0,2} == 0 (weight: 1)</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> objective <span class="op">+</span> constraint_list</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co">print(model) -&gt; </span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co">minimize:</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co">     q_{0,0} q_{0,1} - q_{0,2}</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co">subject to:</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="co">  q_{0,0} + q_{0,1} - q_{0,2} == 0 (weight: 1),</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co">  q_{1,0} + q_{1,1} + q_{1,2} == 1 (weight: 1)</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Model(objective, constraint_list)</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="co">print(model) -&gt; </span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="co">minimize:</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="co">     q_{0,0} q_{0,1} - q_{0,2}</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="co">subject to:</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="co">  q_{0,0} + q_{0,1} - q_{0,2} == 0 (weight: 1),</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="co">  q_{1,0} + q_{1,1} + q_{1,2} == 1 (weight: 1)</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Model(objective)</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="co">print(model) -&gt;</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="co">minimize:</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="co">  q_{0,0} q_{0,1} - q_{0,2}</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Model(constraint1)</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="co">print(model) -&gt;</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="co">minimize:</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="co">  0</span></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="co">subject to:</span></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="co">  q_{0,0} + q_{0,1} - q_{0,2} == 0 (weight: 1)</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Model(constraint_list)</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="co">print(model) -&gt;</span></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a><span class="co">minimize:</span></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="co">  0</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a><span class="co">subject to:</span></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a><span class="co">  q_{0,0} + q_{0,1} - q_{0,2} == 0 (weight: 1),</span></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="co">  q_{1,0} + q_{1,1} + q_{1,2} == 1 (weight: 1)</span></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>objective <span class="op">=</span> q[<span class="dv">0</span>,<span class="dv">0</span>] <span class="op">*</span> q[<span class="dv">0</span>,<span class="dv">1</span>] <span class="op">-</span> q[<span class="dv">0</span>,<span class="dv">2</span>]</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>constraint <span class="op">=</span> equal_to(q[<span class="dv">0</span>,<span class="dv">0</span>] <span class="op">+</span> q[<span class="dv">0</span>,<span class="dv">1</span>] <span class="op">-</span> q[<span class="dv">0</span>,<span class="dv">2</span>], <span class="dv">0</span>)</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> objective <span class="op">+</span> constraint</span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a><span class="co">print(model.objective) -&gt; </span></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a><span class="co">q_{0,0} q_{0,1} - q_{0,2}</span></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a><span class="co">print(model.constraints) -&gt;</span></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a><span class="co">[q_{0,0} + q_{0,1} - q_{0,2} == 0 (weight: 1)]</span></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span></code></pre></div>
+<h1 data-number="7" id="solver-client"><span
+class="header-section-number">7</span> Solver Client</h1>
+<p>The SDK MUST provide a <strong>SolverClient</strong> class that
+abstracts each solver. <strong>SolverClient</strong> class MUST be able
+to set the attributes needed to meet the solver’s specifications.<br />
+The following are some common attributes.</p>
+<ul>
+<li>connection point</li>
+<li>API token</li>
+<li>execution parameters</li>
+</ul>
+<p><strong>SolverClient</strong> class MUST also contain information
+about the solver’s capabilities, such as the types of variables,
+constraints, degrees, and so on that it can handle.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> SDK <span class="im">import</span> XXXClient</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> timedelta</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>client <span class="op">=</span> XXXClient()</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>client.token <span class="op">=</span> <span class="st">&quot;YOUR_API_TOKEN&quot;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>client.parameters.timeout <span class="op">=</span> timedelta(milliseconds<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">print(client) -&gt;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">{&quot;url&quot;:&quot;https://XXX.com&quot;,&quot;token&quot;:&quot;YOUR_API_TOKEN&quot;,</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;parameters&quot;:{&quot;timeout&quot;:1000}}</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span></code></pre></div>
+<h1 data-number="8" id="solver-execution"><span
+class="header-section-number">8</span> Solver Execution</h1>
+<p>The SDK MUST support the following classes and methods to solve a
+combinatorial optimization problem.</p>
+<h2 data-number="8.1" id="solve-function"><span
+class="header-section-number">8.1</span> Solve function</h2>
+<p>The SDK MUST provide the <strong>solve()</strong> function to perform
+combinatorial optimization.</p>
+<p>This function MUST take a <strong>Model</strong> object as its first
+argument and a solver client object as its second argument, optimizing
+the model using the solver associated with the solver client. The return
+value MUST be a <strong>Result</strong> object.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Argument</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">model</td>
+<td style="text-align: left;"><strong>Model</strong></td>
+<td style="text-align: left;">Created in Model Formulation</td>
+</tr>
+<tr>
+<td style="text-align: left;">client</td>
+<td style="text-align: left;"><strong>Client</strong></td>
+<td style="text-align: left;">Created in Solver Client</td>
+</tr>
+</tbody>
+</table>
+<h2 data-number="8.2" id="retrieving-the-result"><span
+class="header-section-number">8.2</span> Retrieving the result</h2>
+<p>A <strong>Result</strong> object returned by the solve function MUST
+contain information about the solution returned by the solver and the
+time taken to run it. <strong>Result</strong> MUST contain not only the
+best solution but also multiple solutions. If <strong>Result</strong>
+contains multiple solutions, the best solution MUST be provided as the
+<strong>best</strong> attribute. The best solution refers to the
+solution that satisfies all the constraints and has the smallest
+objective function value among the multiple solutions.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Attribute</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">best</td>
+<td style="text-align: left;"><strong>Solution</strong></td>
+<td style="text-align: left;">The best solution</td>
+</tr>
+</tbody>
+</table>
+<p>Each solution MUST be obtained as an instance of the
+<strong>Solution</strong> class by indexing on <strong>Result</strong>.
+<strong>Solution</strong> class MUST support the following
+attributes.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Attribute</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">objective</td>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">The value of the objective function</td>
+</tr>
+<tr>
+<td style="text-align: left;">values</td>
+<td style="text-align: left;"><strong>Values</strong></td>
+<td style="text-align: left;">The value of each variable in the
+solution</td>
+</tr>
+<tr>
+<td style="text-align: left;">feasible</td>
+<td style="text-align: left;">bool</td>
+<td style="text-align: left;">Whether the constraint is satisfied or
+not</td>
+</tr>
+<tr>
+<td style="text-align: left;">time</td>
+<td style="text-align: left;">timedelta</td>
+<td style="text-align: left;">The time at which the solver finds the
+solution</td>
+</tr>
+</tbody>
+</table>
+<h2 data-number="8.3" id="example-code-4"><span
+class="header-section-number">8.3</span> Example code</h2>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> SDK <span class="im">import</span> VariableGenerator, one_hot, XXXClient, solve</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datatime <span class="im">import</span> timedelta</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>gen <span class="op">=</span> VariableGenerator()</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> gen.array(<span class="st">&quot;Binary&quot;</span>, <span class="dv">3</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>objective <span class="op">=</span> q[<span class="dv">0</span>] <span class="op">*</span> q[<span class="dv">1</span>] <span class="op">-</span> q[<span class="dv">2</span>]</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>constraint <span class="op">=</span> one_hot(q)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> objective <span class="op">+</span> constraint</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>client <span class="op">=</span> XXXClient()</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>client.token <span class="op">=</span> <span class="st">&quot;YOUR_API_TOKEN&quot;</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>client.parameters.timeout <span class="op">=</span> timedelta(milliseconds<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> solve(model, client)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">print(result.best.objective) -&gt; -1.0</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">print(result.best.values) -&gt; Values({Poly(q_0): 0, Poly(q_1): 0, Poly(q_2): 1})</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">print(result.best.feasible) -&gt; True</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co">print(result.best.time) -&gt; datetime.timedelta(microseconds=27965)</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;</span></span></code></pre></div>
+<h1 data-number="9" id="references"><span
+class="header-section-number">9</span> References</h1>
+<p>This chapter describes the definition and specification of the
+objects that SDK MUST support.</p>
+<h2 data-number="9.1" id="algebraic-classes-and-numerics"><span
+class="header-section-number">9.1</span> Algebraic classes and
+numerics</h2>
+<h3 data-number="9.1.1" id="sdk.poly-class"><span
+class="header-section-number">9.1.1</span> SDK.<strong>Poly</strong>
+class</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Return type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">as_variable(self)</td>
+<td style="text-align: left;"><strong>Variable</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">degree(self)</td>
+<td style="text-align: left;">int</td>
+</tr>
+<tr>
+<td style="text-align: left;">evaluate(self, values: Values)</td>
+<td style="text-align: left;">float</td>
+</tr>
+<tr>
+<td style="text-align: left;">is_linear(self)</td>
+<td style="text-align: left;">bool</td>
+</tr>
+<tr>
+<td style="text-align: left;">is_number(self)</td>
+<td style="text-align: left;">bool</td>
+</tr>
+<tr>
+<td style="text-align: left;">is_quadratic(self)</td>
+<td style="text-align: left;">bool</td>
+</tr>
+<tr>
+<td style="text-align: left;">is_variable(self)</td>
+<td style="text-align: left;">bool</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Attribute</th>
+<th style="text-align: left;">Return type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">int</td>
+</tr>
+<tr>
+<td style="text-align: left;">lower_bound</td>
+<td style="text-align: left;">float</td>
+</tr>
+<tr>
+<td style="text-align: left;">name</td>
+<td style="text-align: left;">string</td>
+</tr>
+<tr>
+<td style="text-align: left;">type</td>
+<td style="text-align: left;"><strong>VariableType</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">upper_bound</td>
+<td style="text-align: left;">float</td>
+</tr>
+<tr>
+<td style="text-align: left;">variables</td>
+<td style="text-align: left;">list[<strong>Variable</strong>]</td>
+</tr>
+</tbody>
+</table>
+<h3 data-number="9.1.2" id="sdk.polyarray-class"><span
+class="header-section-number">9.1.2</span>
+SDK.<strong>PolyArray</strong> class</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Return type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">evaluate(self, values: Values)</td>
+<td style="text-align: left;">ndarray[Any, dtype[numpy.float64]]</td>
+</tr>
+<tr>
+<td style="text-align: left;">sum(self, axis: int</td>
+<td style="text-align: left;">tuple[int, …]</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Attribute</th>
+<th style="text-align: left;">Return type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">ndim</td>
+<td style="text-align: left;">int</td>
+</tr>
+<tr>
+<td style="text-align: left;">shape</td>
+<td style="text-align: left;">tuple[int, …]</td>
+</tr>
+<tr>
+<td style="text-align: left;">size</td>
+<td style="text-align: left;">int</td>
+</tr>
+</tbody>
+</table>
+<h3 data-number="9.1.3" id="sdk.variable-class"><span
+class="header-section-number">9.1.3</span> SDK.<strong>Variable</strong>
+class</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Attribute</th>
+<th style="text-align: left;">Return type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">int</td>
+</tr>
+<tr>
+<td style="text-align: left;">lower_bound</td>
+<td style="text-align: left;">float</td>
+</tr>
+<tr>
+<td style="text-align: left;">name</td>
+<td style="text-align: left;">string</td>
+</tr>
+<tr>
+<td style="text-align: left;">type</td>
+<td style="text-align: left;"><strong>VariableType</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">upper_bound</td>
+<td style="text-align: left;">float</td>
+</tr>
+</tbody>
+</table>
+<h3 data-number="9.1.4" id="sdk.variablegenerator-class"><span
+class="header-section-number">9.1.4</span>
+SDK.<strong>VariableGenerator</strong> class</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Return type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">array(self, type: str</td>
+<td style="text-align: left;"><strong>VariableType</strong>, shape:
+tuple[int, …]</td>
+</tr>
+<tr>
+<td style="text-align: left;">scalar(self, type: str</td>
+<td style="text-align: left;"><strong>VariableType</strong>, bounds:
+tuple[float</td>
+</tr>
+</tbody>
+</table>
+<pre><code>     bounds : Defaults to (None, None)
+
+     name : Defaults to &#39;&#39;</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Attribute</th>
+<th style="text-align: left;">Return type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">variables</td>
+<td style="text-align: left;">list[<strong>Variable</strong>]</td>
+</tr>
+</tbody>
+</table>
+<h3 data-number="9.1.5" id="sdk.sum-function"><span
+class="header-section-number">9.1.5</span> SDK.<strong>sum()</strong>
+function</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Return type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">sum(list) sum(Iterator)</td>
+<td style="text-align: left;">Any</td>
+</tr>
+<tr>
+<td style="text-align: left;">sum(<strong>PolyArray</strong>, axis:
+int</td>
+<td style="text-align: left;">Tuple[int, …]</td>
+</tr>
+</tbody>
+</table>
+<pre><code>     axis : Defaults to NoneConstraint classes and functions</code></pre>
+<h3 data-number="9.1.6" id="sdk.variabletype-enum-class"><span
+class="header-section-number">9.1.6</span>
+SDK.<strong>VariableType</strong> enum class</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Member</th>
+<th style="text-align: left;">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Binary</td>
+<td style="text-align: left;"><strong>VariableType</strong>.Binary</td>
+</tr>
+<tr>
+<td style="text-align: left;">Integer</td>
+<td style="text-align: left;"><strong>VariableType</strong>.Integer</td>
+</tr>
+<tr>
+<td style="text-align: left;">Ising</td>
+<td style="text-align: left;"><strong>VariableType</strong>.Ising</td>
+</tr>
+<tr>
+<td style="text-align: left;">Real</td>
+<td style="text-align: left;"><strong>VariableType</strong>.Real</td>
+</tr>
+</tbody>
+</table>
+<h2 data-number="9.2" id="constraints-1"><span
+class="header-section-number">9.2</span> Constraints</h2>
+<h3 data-number="9.2.1" id="sdk.constraint-class"><span
+class="header-section-number">9.2.1</span>
+SDK.<strong>Constraint</strong> class</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Return type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">is_satisfied(self, values:
+<strong>Values</strong>)</td>
+<td style="text-align: left;">bool</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Attribute</th>
+<th style="text-align: left;">Return type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">conditional</td>
+<td style="text-align: left;">tuple[<strong>Poly</strong>, str,
+Union[float, tuple[float, float]]]</td>
+</tr>
+<tr>
+<td style="text-align: left;">label</td>
+<td style="text-align: left;">string</td>
+</tr>
+<tr>
+<td style="text-align: left;">penalty</td>
+<td style="text-align: left;"><strong>Poly</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">weight</td>
+<td style="text-align: left;">float</td>
+</tr>
+</tbody>
+</table>
+<h3 data-number="9.2.2" id="sdk.constraintlist-class"><span
+class="header-section-number">9.2.2</span>
+SDK.<strong>ConstraintList</strong> class</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Return type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">append(self, value:
+<strong>Constraint</strong>)</td>
+<td style="text-align: left;">None</td>
+</tr>
+<tr>
+<td style="text-align: left;">remove(self, value:
+<strong>Constraint</strong>)</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<h3 data-number="9.2.3" id="functions"><span
+class="header-section-number">9.2.3</span> Functions</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Arguments</th>
+<th style="text-align: left;">Return type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">equal_to() one_hot() less_equal()
+greater_equal()</td>
+<td style="text-align: left;">poly: <strong>Poly</strong>, right: float,
+label: str = ’’</td>
+<td style="text-align: left;"><strong>Constraint</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">array: <strong>PolyArray</strong>, right:
+float, label: str = ’’, axis: int</td>
+<td style="text-align: left;">tuple[int, …]</td>
+</tr>
+<tr>
+<td style="text-align: left;">clamp()</td>
+<td style="text-align: left;">poly: <strong>Poly</strong>, bounds:
+tuple[float</td>
+<td style="text-align: left;">None, float</td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">array: <strong>PolyArray</strong>, bounds:
+tuple[float</td>
+<td style="text-align: left;">None, float</td>
+</tr>
+</tbody>
+</table>
+<h2 data-number="9.3" id="model-classes-and-functions"><span
+class="header-section-number">9.3</span> Model classes and
+functions</h2>
+<h3 data-number="9.3.1" id="sdk.model-class"><span
+class="header-section-number">9.3.1</span> SDK.<strong>Model</strong>
+class</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Return type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">copy(self)</td>
+<td style="text-align: left;"><strong>Model</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">get_variables(self)</td>
+<td style="text-align: left;">list[<strong>Variable</strong>]</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Attribute</th>
+<th style="text-align: left;">Return type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">constraints</td>
+<td style="text-align: left;"><strong>ConstraintList</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">objective</td>
+<td style="text-align: left;"><strong>Poly</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">variables</td>
+<td style="text-align: left;">list[<strong>Variable</strong>]</td>
+</tr>
+</tbody>
+</table>
+<h2 data-number="9.4" id="solve-solve-classes-and-functions"><span
+class="header-section-number">9.4</span> Solve (Solve classes and
+functions)</h2>
+<h3 data-number="9.4.1" id="sdk.result.solution-class"><span
+class="header-section-number">9.4.1</span>
+SDK.<strong>Result.Solution</strong> class</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Attribute</th>
+<th style="text-align: left;">Return type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">feasible</td>
+<td style="text-align: left;">bool</td>
+</tr>
+<tr>
+<td style="text-align: left;">objective</td>
+<td style="text-align: left;">float</td>
+</tr>
+<tr>
+<td style="text-align: left;">time</td>
+<td style="text-align: left;">timedelta</td>
+</tr>
+<tr>
+<td style="text-align: left;">values</td>
+<td style="text-align: left;"><strong>Values</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 data-number="9.4.2" id="sdk.result-class"><span
+class="header-section-number">9.4.2</span> SDK.<strong>Result</strong>
+class</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Attribute</th>
+<th style="text-align: left;">Return type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">best</td>
+<td style="text-align: left;"><strong>Solution</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">client_result</td>
+<td style="text-align: left;"><strong>Poly</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">execution_time</td>
+<td style="text-align: left;">list[<strong>Variable</strong>]</td>
+</tr>
+<tr>
+<td style="text-align: left;">num_solves</td>
+<td style="text-align: left;">int</td>
+</tr>
+<tr>
+<td style="text-align: left;">response_time</td>
+<td style="text-align: left;">timedelta</td>
+</tr>
+<tr>
+<td style="text-align: left;">solutions</td>
+<td style="text-align: left;"><strong>SolutionList</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">total_time</td>
+<td style="text-align: left;">timedelta</td>
+</tr>
+</tbody>
+</table>
+<h3 data-number="9.4.3" id="sdk.result.values-class"><span
+class="header-section-number">9.4.3</span> SDK.Result.Values class</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Return type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">items</td>
+<td style="text-align: left;">View of list[tuple[<strong>Poly</strong>,
+float]]</td>
+</tr>
+<tr>
+<td style="text-align: left;">keys</td>
+<td style="text-align: left;">View of list[<strong>Poly</strong>]</td>
+</tr>
+<tr>
+<td style="text-align: left;">values</td>
+<td style="text-align: left;">View of list[float]</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
