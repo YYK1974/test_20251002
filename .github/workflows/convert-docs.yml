@@ -1,11 +1,12 @@
 # ファイル名: .github/workflows/convert-docs.yml
 
 name: Pandoc Document Conversion
+run-name: ${{ github.actor }} is Running Pandoc, Upload Actions
 
 on:
   # "main" ブランチに push されたときに実行
   push:
-    branches: [ "mapipeline_test" ]
+    branches: [ "main" ]
   # 手動でも実行できるようにする
   workflow_dispatch:
 
@@ -18,24 +19,43 @@ jobs:
       # 1. リポジトリのコードをチェックアウトする
       - name: Check out repository
         uses: actions/checkout@v4
+      # 2. 変換先のディレクトリを作成 (オプションだが推奨)
+      - name: Create Artifact Directory
+        run: mkdir -p artifact_output
 
-      # 2. Pandoc公式のアクションを実行する
+      # 3. GitHubのPandoc Converter のPDFへの変換アクションを実行する
       - name: Convert Markdown to PDF
-        # pandoc/file-converter-action の バージョン3 を使用
-        uses: pandoc/file-converter-action@v3
-        with:
-          # 変換する入力ファイル
-          input: "specification.md"
-          # 出力するファイル名
-          output: "out.pdf"
-          # Pandocに渡す追加オプション（例: スタンドアロン、目次）
-          args: "--standalone --toc"
+        uses: docker://pandoc/extra:3.8
 
-      # 3. (オプション) 変換したファイルをアーティファクトとして保存する
-      - name: Upload Artifact
+        with:
+          args: >-
+            --output=artifact_output/specification.pdf
+            --standalone
+            --toc
+            --number-sections
+            -H pdf_custom.tex
+            specification_png.md
+
+      # 4. GitHubのPandoc Converter のHTMLへの変換アクションを実行する
+      - name: Convert Markdown to HTML
+        uses: docker://pandoc/extra:3.8
+        with:
+          args: >-
+            --output=artifact_output/specification.html
+            --standalone
+            --toc
+            --number-sections
+            -c pandoc.css
+            -c custom.css
+            --embed-resources
+            specification.md
+
+      # 5. PDF,HTMLアーティファクトのアップロード
+      - name: Upload PDF Artifact
         uses: actions/upload-artifact@v4
         with:
-          # アーティファクトの名前
-          name: converted-pdf
-          # 保存するファイルのパス
-          path: "out.pdf"
+          name: specification-pdf,html
+          path: |
+            artifact_output/specification.pdf
+            artifact_output/specification.html
+            img/*

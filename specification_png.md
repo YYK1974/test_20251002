@@ -30,7 +30,7 @@ The SDK assumes Python as its runtime environment. Therefore, although attribute
 
 This specification assumes the following system architecture, shown in Fig.2.
 
-![A schematic system architecture assumed in this specification](./img/Fig2.svg){#fig:system-architecture}
+![A schematic system architecture assumed in this specification](./img/Fig2.png){#fig:system-architecture}
 
 The SDK MUST be able to perform optimization by formulating a combinatorial optimization problem using the following steps:
 
