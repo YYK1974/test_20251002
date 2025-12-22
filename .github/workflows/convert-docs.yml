@@ -6,7 +6,7 @@ run-name: ${{ github.actor }} is Running Pandoc, Upload Actions
 on:
   # "main" ブランチに push されたときに実行
   push:
-    branches: [ "pipeline_test" ]
+    branches: [ "main" ]
   # 手動でも実行できるようにする
   workflow_dispatch:
 
