@@ -33,7 +33,7 @@ jobs:
             --standalone
             --toc
             --number-sections
-            -H pdf_custom.tex
+            -H style/pdf_custom.tex
             specification.md
 
       # 4. GitHubのPandoc Converter のHTMLへの変換アクションを実行する
@@ -45,8 +45,8 @@ jobs:
             --standalone
             --toc
             --number-sections
-            -c pandoc.css
-            -c custom.css
+            -c style/pandoc.css
+            -c style/custom.css
             --embed-resources
             specification.md
 
