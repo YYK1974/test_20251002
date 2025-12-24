@@ -1,0 +1,56 @@
+\usepackage{geometry}
+\geometry{
+  a4paper,
+  lmargin=22mm,
+  rmargin=22mm,
+  tmargin=25mm,
+  bmargin=22mm
+}
+
+\usepackage[framemethod=default]{mdframed}
+\usepackage{xcolor}
+
+% 色の定義
+\definecolor{codegray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{bordergray}{rgb}{0.6, 0.6, 0.6}
+
+% コードブロックのカスタマイズ
+\makeatletter
+% 1. まずShaded環境が「未定義」の場合のみ、空の環境を作っておく（エラー回避）
+\@ifundefined{Shaded}{\newenvironment{Shaded}{}{}}{}
+\makeatother
+
+\makeatletter
+%画像の最大幅を設定
+\def\maxwidth{%
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\setkeys{Gin}{width=0.6\maxwidth,keepaspectratio}
+\makeatother
+
+% すべての画像を「ピクセル数 / 300dpi」相当のサイズで表示する設定
+%\setkeys{Gin}{width=0.3\Gin@nat@width,keepaspectratio}
+
+% 2. 確実に存在する状態になったので、改めて「renewenvironment」で上書きする
+\renewenvironment{Shaded}{
+  \begin{mdframed}[
+    linecolor=bordergray,
+    backgroundcolor=codegray,
+    linewidth=0.4pt,
+    roundcorner=0pt,
+    innertopmargin=5pt,
+    innerbottommargin=5pt,
+    innerleftmargin=5pt,
+    innerrightmargin=5pt,
+    skipabove=\medskipamount,
+    skipbelow=\medskipamount,
+    splitbottomskip=5pt,
+    splittopskip=5pt
+  ]
+}{
+  \end{mdframed}
+}

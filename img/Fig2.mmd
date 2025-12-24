@@ -1,0 +1,24 @@
+```mermaid
+%%{init:{'theme':'neutral'}}%%
+flowchart TB
+  node_1("VariableGenerator")
+  node_2("PolyArray")
+  node_3("Poly")
+  node_4("Constraint/ConstraintList")
+  node_5("Model")
+  node_6("Matrix")
+  node_7("Result")
+  node_8{{"solve(model, client)"}}
+  node_20("ClientA / ClientB / ...")
+  node_1 --> |"array()"| node_2
+  node_1 --> |"scalar()"| node_3
+  node_2 --> |"sum(),<br>(arithmetics)"| node_3
+  node_1 --> |"matrix()"| node_6
+  node_3 --> |"equal_to(),<br>less_equal(),<br>..."|node_4
+  node_3 --> node_5
+  node_4 --> node_5
+  node_6 --> node_5
+  node_5 --> node_8
+  node_20 ------> node_8
+  node_8 --> node_7
+```
