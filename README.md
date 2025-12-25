@@ -16,6 +16,6 @@ To contribute to the specification document, please follow these steps:
 
 4. Request a Merge: Notify the maintainers to review and merge your branch.
 
-Note: When your branch is merged into the main branch, a GitHub Workflow will automatically convert the Markdown files into PDF and HTML formats.
+<small>**Note:** When your branch is merged into the main branch, a GitHub Workflow will automatically convert the Markdown files into PDF and HTML formats.</small>
 
 5. Download the Artifacts: You can then download the updated specification document set from the GitHub Actions artifact section.
